@@ -104,7 +104,7 @@ if (quoteForm) {
 
         // Uncomment when EmailJS is configured:
         /*
-        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        emailjs.send('service_ahnif4s', 'template_tqh0y5h', templateParams)
             .then(function(response) {
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
                 showNotification('✅ Thank you! Your request has been sent.', 'success');
