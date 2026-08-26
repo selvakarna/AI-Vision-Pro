@@ -119,13 +119,17 @@ if (quoteForm) {
             })
             .catch(function(error) {
                 console.error('FAILED TO SEND EMAIL:', error);
+                
+                // 🔍 THIS WILL SHOW THE REAL ERROR ON THE SCREEN
+                let realError = error.text || error.status || "Unknown Error";
+                showNotification('❌ EmailJS Error: ' + realError, 'error');
+                
                 submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed to send';
-                showNotification('❌ Failed to send email. Please check your EmailJS Public Key in index.html.', 'error');
                 
                 setTimeout(() => {
                     submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Quote Request';
                     submitBtn.disabled = false;
-                }, 3000);
+                }, 5000);
             });
     });
 }
@@ -143,7 +147,7 @@ function showNotification(message, type) {
     setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => notification.remove(), 300);
-    }, 5000);
+    }, 7000); // Kept popup open a bit longer so you can read the error!
 }
 
 console.log('🚀 AIVisionPro Website Loaded & Email Service Ready!');
