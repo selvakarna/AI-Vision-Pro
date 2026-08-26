@@ -104,8 +104,8 @@ if (quoteForm) {
             message: document.getElementById('projectDesc').value,
         };
 
-        // Live EmailJS Call
-        emailjs.send('service_ahnif4s', 'kps.shelva@gmail.com', templateParams)
+        // ⚠️ REPLACE 'YOUR_TEMPLATE_ID_HERE' WITH YOUR ACTUAL TEMPLATE ID (e.g. template_a1b2c3d)
+        emailjs.send('service_ahnif4s', 'template_6q3m76l', templateParams)
             .then(function(response) {
                 console.log('SUCCESS!', response.status, response.text);
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully!';
@@ -120,7 +120,6 @@ if (quoteForm) {
             .catch(function(error) {
                 console.error('FAILED TO SEND EMAIL:', error);
                 
-                // 🔍 THIS WILL SHOW THE REAL ERROR ON THE SCREEN
                 let realError = error.text || error.status || "Unknown Error";
                 showNotification('❌ EmailJS Error: ' + realError, 'error');
                 
@@ -147,7 +146,7 @@ function showNotification(message, type) {
     setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => notification.remove(), 300);
-    }, 7000); // Kept popup open a bit longer so you can read the error!
+    }, 7000);
 }
 
 console.log('🚀 AIVisionPro Website Loaded & Email Service Ready!');
