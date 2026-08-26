@@ -105,7 +105,7 @@ if (quoteForm) {
         };
 
         // Live EmailJS Call
-        emailjs.send('service_ahnif4s', 'template_tqh0y5h', templateParams)
+        emailjs.send('service_ahnif4s', 'kps.shelva@gmail.com', templateParams)
             .then(function(response) {
                 console.log('SUCCESS!', response.status, response.text);
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully!';
