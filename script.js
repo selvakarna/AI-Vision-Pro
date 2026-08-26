@@ -82,13 +82,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ========== EMAILJS FORM ==========
+// ========== LIVE EMAILJS FORM SUBMISSION ==========
 const quoteForm = document.getElementById('quoteForm');
 const submitBtn = document.getElementById('submitBtn');
 
 if (quoteForm) {
     quoteForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        // Disable button & show spinner
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitBtn.disabled = true;
 
@@ -102,42 +104,33 @@ if (quoteForm) {
             message: document.getElementById('projectDesc').value,
         };
 
-        // Uncomment when EmailJS is configured:
-        /*
+        // Live EmailJS Call
         emailjs.send('service_ahnif4s', 'template_tqh0y5h', templateParams)
             .then(function(response) {
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
-                showNotification('✅ Thank you! Your request has been sent.', 'success');
+                console.log('SUCCESS!', response.status, response.text);
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully!';
+                showNotification('✅ Thank you! Your quote request has been sent to my inbox.', 'success');
                 quoteForm.reset();
+                
                 setTimeout(() => {
                     submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Quote Request';
                     submitBtn.disabled = false;
                 }, 3000);
             })
             .catch(function(error) {
-                submitBtn.innerHTML = '<i class="fas fa-exclamation"></i> Failed';
-                showNotification('❌ Something went wrong. Please try again.', 'error');
+                console.error('FAILED TO SEND EMAIL:', error);
+                submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed to send';
+                showNotification('❌ Failed to send email. Please check your EmailJS Public Key in index.html.', 'error');
+                
                 setTimeout(() => {
                     submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Quote Request';
                     submitBtn.disabled = false;
                 }, 3000);
             });
-        */
-
-        // Temporary demo alert (remove when EmailJS is configured):
-        setTimeout(() => {
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
-            showNotification('✅ Thank you! Your request has been received.', 'success');
-            quoteForm.reset();
-            setTimeout(() => {
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Quote Request';
-                submitBtn.disabled = false;
-            }, 3000);
-        }, 1500);
     });
 }
 
-// ========== NOTIFICATION ==========
+// ========== NOTIFICATION SYSTEM ==========
 function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
@@ -153,4 +146,4 @@ function showNotification(message, type) {
     }, 5000);
 }
 
-console.log('🚀 AIVisionPro Website Loaded!');
+console.log('🚀 AIVisionPro Website Loaded & Email Service Ready!');
